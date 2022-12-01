@@ -5,7 +5,7 @@ $stock = @()
 
 foreach ($line in $input) {
 
-if ($line) {$i += $line} else {$stock += $i ; $i = 0}
+if ($line) {[int]$i += $line} else {$stock += $i ; $i = 0}
 
 }
 
