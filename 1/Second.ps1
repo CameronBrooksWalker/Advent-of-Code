@@ -1,5 +1,5 @@
 
-$input = get-content 'C:\Users\cwalker\Advent of Code\1\input.txt'
+$input = get-content '.\1\input.txt'
 
 $stock = @()
 
