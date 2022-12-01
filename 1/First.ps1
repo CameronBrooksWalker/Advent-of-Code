@@ -1,6 +1,5 @@
 
-
-$input = get-content 'c:\users\cwalker\documents\powershell projects\Advent of Code\Day1input.txt'
+$input = get-content 'C:\Users\cwalker\Advent of Code\1\input.txt'
 
 $stock = @()
 
