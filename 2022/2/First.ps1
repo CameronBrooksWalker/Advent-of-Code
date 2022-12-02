@@ -20,4 +20,3 @@ switch ($line)
 }
 
 echo $score
-
