@@ -13,8 +13,6 @@ if(([int][char]$char) -gt 97){$sum += ([int][char]$char - 96)} else {$sum += ([i
 
 break
 
-}
-}
-}
+}}}
 
 echo $sum
