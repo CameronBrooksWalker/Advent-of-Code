@@ -1,4 +1,4 @@
-$input = Get-Content .\input.txt
+$input = Get-Content .\testinput.txt
 
 $coord=0,0
 
