@@ -26,17 +26,17 @@ for($x=1 ; $x -lt $stacks[0].length ; $x+=4){
     $z++
     }
 
+    
 #perform instructions
 foreach($inst in $instructions)
 {
 $inst = $inst.split()
 
-for($i=0 ; $i -lt $inst[1] ; $i++)
-{
+if($inst){
 
-$array[$inst[5]-1] += $array[($inst[3]-1)][($array[$inst[3]-1].length -1)]
+$array[$inst[5]-1] += $array[($inst[3]-1)].substring(($array[($inst[3]-1)].length)-$inst[1],$inst[1])
 
-$array[$inst[3]-1] = $array[$inst[3]-1].remove(($array[$inst[3]-1].length)-1,1)
+$array[$inst[3]-1] = $array[$inst[3]-1].remove(($array[($inst[3]-1)].length)-$inst[1],$inst[1])
 
 }
 
