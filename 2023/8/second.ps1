@@ -89,4 +89,4 @@ function find-first {
             
             get-lcm -numbers $firsts
             
-            Write-Host "all total time was" $alltimer.elapsed "seconds"
+            Write-Host "total time was" $alltimer.elapsed "seconds"
