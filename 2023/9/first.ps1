@@ -36,10 +36,12 @@ function get-diffs {
 
         $finals += $temp[$temp.Count-1]
 
-        while ($temp[$temp.Count-1] -ne 0) {
+        #while ($temp[$temp.Count-1] -ne 0) {
+        while ($temp -ne 0) {
 
             $temp = get-diffs -nums $temp
             $finals += $temp[$temp.Count-1]
+            #write-host $temp
             
         }
 
