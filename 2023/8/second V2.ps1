@@ -16,6 +16,8 @@ $starters = $starters.Substring(0,3)
 
 [int[]]$firsts = @()
 
+Write-Host "After variables and stuff" $alltimer.elapsed "seconds"
+
 foreach($inny in $input)
 {
     
@@ -25,6 +27,7 @@ foreach($inny in $input)
     
 }
 
+Write-Host "after making the map" $alltimer.elapsed "seconds"
 
 function find-first {
     param (
@@ -43,6 +46,8 @@ function find-first {
                 "L" {$starguy = $map.$starguy[0]}
                 #"L" {$starguy = $map.$starguy.split(",")[0]}
             }
+
+            #Write-Host "after switch turn $i" $alltimer.elapsed "seconds"
             
             if($starguy.Substring(2,1) -eq "Z"){return $total}
             
@@ -86,10 +91,14 @@ function find-first {
                 $thisfirst = find-first -starguy $starters[$n]
                 
                 $firsts += $thisfirst
+
+                Write-Host "after the $n starter" $alltimer.elapsed "seconds"
                 
                 #echo $thisfirst
                 
             }
+
+            echo $firsts
             
             get-lcm -numbers $firsts
             
