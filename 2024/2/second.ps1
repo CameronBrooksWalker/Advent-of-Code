@@ -1,8 +1,49 @@
 
 $timer =  [Diagnostics.Stopwatch]::StartNew()
 
+function check-safety {
+    param (
+        $list = @()
+    )
+    
 
-$input = Get-Content "C:\users\cwalker\Documents\AdventOfCode\Advent-of-Code\2024\2\testinput"
+
+[bool]$direction = 0 #set bool for checking if increasing or decreasing
+if($list[1] - $list[0] -gt 0){$direction = 1} #if increasing, make direction bool true
+
+[bool]$safe = 1
+
+
+for ($i = 0; $i -lt $list.Count-1; $i++) 
+{
+    
+$change = $list[$i+1] - $list[$i] #calculate change
+
+
+if($direction)
+{
+    if($change -le 0 -or $change -ge 4){$safe = 0}
+}
+else 
+{
+    if($change -ge 0 -or $change -le -4){$safe = 0}
+    
+}
+
+}
+
+return $safe
+
+}
+
+
+
+
+
+
+
+
+$input = Get-Content "C:\users\cwalker\Documents\AdventOfCode\Advent-of-Code\2024\2\input"
 
 [int]$safecount = 0
 
@@ -12,114 +53,26 @@ foreach($line in $input)
 
 $nums = $line.split() #split values into integer array
 
-[bool]$direction = 0 #set bool for checking if increasing or decreasing
 
-if($nums[1] - $nums[0] -gt 0){$direction = 1} #if increasing, make direction bool true
+if(check-safety -list $nums) {$safecount++}
+else{
 
-[bool]$safe = 1
+for ($i = 0; $i -lt $nums.Count; $i++) {
 
-$dampener = 0
+    $newnums = [System.Collections.ArrayList]$nums
 
+    $newnums.RemoveAt($i)
 
-for ($i = 0; $i -lt $nums.Count-1; $i++) 
-{
-    
-$change = $nums[$i+1] - $nums[$i] #calculate change
-
-#  write-host $change
-
-if($direction)
-{
-    if($change -le 0 -or $change -ge 4){$safe = 0; if($dampener -eq 0){$dampener = $i}}
-}
-else 
-{
-    if($change -ge 0 -or $change -le -4){$safe = 0; if($dampener -eq 0){$dampener = $i}}
+    if(check-safety -list $newnums){$safecount++;break}
     
 }
 
+ 
 }
-
-
-if($safe)
-{
-    $safecount++
-}
-else 
-{
-    write-host "RETRY" -BackgroundColor Yellow
-
-    write-host "Old nums: $nums"
-
-    $nums[$dampener] = $null; $nums = ($nums | where {$_ -notlike $null})
-
-    if($nums[1] - $nums[0] -gt 0){$direction = 1} #if increasing, make direction bool true
-
-    write-host "New Nums: $nums"
-
-    $safe = 1
-
-    for ($i = 0; $i -lt $nums.Count-1; $i++) 
-    {
-        
-    $change = $nums[$i+1] - $nums[$i] #calculate change
-    write-host $change
-    
-    if($direction)
-    {
-        if($change -le 0 -or $change -ge 4){$safe = 0}
-    }
-    else 
-    {
-        if($change -ge 0 -or $change -le -4){$safe = 0}
-        
-    }
-    
-    }
-
-    if($safe){$safecount++; write-host "SAFE" -BackgroundColor Green}
-    else
-    {
-        write-host "ANOTHER" -BackgroundColor Yellow
-
-        $nums = $line.split()
-
-        write-host "Old nums: $nums"
-
-    $nums[$dampener+1] = $null; $nums = ($nums | where {$_ -notlike $null})
-
-    if($nums[1] - $nums[0] -gt 0){$direction = 1} #if increasing, make direction bool true
-
-    write-host "New Nums: $nums"
-
-    $safe = 1
-
-    for ($i = 0; $i -lt $nums.Count-1; $i++) 
-    {
-        
-    $change = $nums[$i+1] - $nums[$i] #calculate change
-    write-host $change
-    
-    if($direction)
-    {
-        if($change -le 0 -or $change -ge 4){$safe = 0}
-    }
-    else 
-    {
-        if($change -ge 0 -or $change -le -4){$safe = 0}
-        
-    }
-    
-    }
-    if($safe){$safecount++; write-host SAFE -BackgroundColor Green}else{write-host "NOT SAFE" -BackgroundColor Red}
-    }
 }
 
 
 
-# write-host "---------------"
-
-}
 
 Write-Host $safecount
 
