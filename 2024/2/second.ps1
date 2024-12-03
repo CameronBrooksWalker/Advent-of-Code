@@ -77,4 +77,4 @@ for ($i = 0; $i -lt $nums.Count; $i++) {
 Write-Host $safecount
 
 
-Write-Host "total time was" $timer.elapsed "seconds"
+Write-Host "total time was" $timer.elapsed.milliseconds "seconds"
