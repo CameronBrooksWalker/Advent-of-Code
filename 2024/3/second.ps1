@@ -24,4 +24,4 @@ foreach($value in [regex]::Matches($input, $grabdodonts).Value)
 
 write-host "total is :" $total -BackgroundColor Green
 
-Write-Host "total time was" $timer.elapsed "seconds"
+$timer.stop(); Write-Host "Script ran in:" $timer.elapsed.milliseconds "milliseconds" -BackgroundColor Gray -ForegroundColor Red
